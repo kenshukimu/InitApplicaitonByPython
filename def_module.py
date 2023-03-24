@@ -10,52 +10,66 @@ import time
 from winreg import *
 import logging_config as log
 import os
+import numpy as np
+import cv2
 
-#이미지에 맞는 좌표값 찾아서 클릭
-def click_after_move(image_path):
-    ins = gui.locateCenterOnScreen(image_path)  
+#이미지 경로 배열로 받아 처리
+def click_after_move3(image_path_list):
+    rtn = False
+    for logImgpath in image_path_list: 
+        n = np.fromfile(logImgpath, np.uint8)
+        image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
+        ins = gui.locateCenterOnScreen(image_path1)  
     
-    if ins is None:
-        #print({image_path, ":" , ins})
-        log.logger.warning(image_path + " : 이미지를 찾을 수 없습니다.")
-        return None
-    
-    gui.moveTo(ins);
-    gui.click();
-    time.sleep(1);
-    return ""; #return default none
-
-#이미지(2개)에 맞는 좌표값 찾아서 클릭
-def click_after_move2(image_path1, image_path2):
-    #해상도 정확도 조정(디폴트값 : 99.9)
-    ins = gui.locateCenterOnScreen(image_path1)
-    if ins is None:
-        #print(image_path1 + " : 이미지를 찾을 수 없습니다.")
-        log.logger.warning(image_path1 + " : 이미지를 찾을 수 없습니다.")
-        ins = gui.locateCenterOnScreen(image_path2)
-    if ins is None:
-        #print(image_path2 + " : 이미지를 찾을 수 없습니다.")
-        log.logger.warning(image_path2 + " : 이미지를 찾을 수 없습니다.")
-        return None                                         
-
-    gui.moveTo(ins);
-    gui.click();
-    time.sleep(1);
-    return "";
+        if ins is None:
+            #print(image_path2 + " : 이미지를 찾을 수 없습니다.")
+            log.logger.warning(logImgpath + " : 이미지를 찾을 수 없습니다.")
+        else:            
+            gui.moveTo(ins);
+            gui.click();
+            time.sleep(1); 
+            rtn = True      
+            break     
+    return rtn
 
 #이미지에 맞는 좌표값 찾아서 클릭 (없으면 정지)
-def click_after_move_stop(image_path):
-    ins = gui.locateCenterOnScreen(image_path)  
+def click_after_move_stop(image_path_list):
+    rtn = False
+    for logImgpath in image_path_list: 
+        n = np.fromfile(logImgpath, np.uint8)
+        image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
+        ins = gui.locateCenterOnScreen(image_path1)  
     
-    if ins is None:
-        #print({image_path, ":" , ins})
-        log.logger.warning(image_path + " : 이미지를 찾을 수 없습니다.")
-        exit()
+        if ins is None:
+            log.logger.warning(logImgpath + " : 이미지를 찾을 수 없습니다.")
+        else:            
+            gui.moveTo(ins);
+            gui.click();
+            time.sleep(1); 
+            rtn = True  
+            break
 
-    gui.moveTo(ins);
-    gui.click();
-    time.sleep(1);
-    return ""; #return default none
+    if not rtn :
+        gui.screenshot('C:\\temp\\kcciInitLog\\KcciErrorImg.png')
+        raise Exception("![중요]! " + logImgpath + " : 이미지를 찾을 수 없습니다.")       
+    
+    return rtn
+
+#이미지 확인
+def image_find(image_path_list):
+    rtn = False
+    for logImgpath in image_path_list: 
+        n = np.fromfile(logImgpath, np.uint8)
+        image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
+        ins = gui.locateCenterOnScreen(image_path1)  
+    
+        if ins is None:
+            #print(image_path2 + " : 이미지를 찾을 수 없습니다.")
+            log.logger.warning(logImgpath + " : 이미지를 찾을 수 없습니다.")
+        else:
+            rtn = True;
+            break   
+    return rtn
 
 
 #프로세스 제거
@@ -183,7 +197,8 @@ def update_regedit_single_binary() :
         #print(f"Error: {e}")
     else:    
         SetValueEx(Registrykey, "FontInfoCache", 0,REG_BINARY, value_data)
-        print ("Setting <" + "FontInfoCache" + "> with value: " + "HexData")        
+        #print ("Setting <" + "FontInfoCache" + "> with value: " + "HexData")    
+        log.logger.info("Setting <" + "FontInfoCache" + "> with value: " + "HexData")    
         CloseKey(Registrykey)
 
 #레지스트리 삭제
@@ -208,23 +223,20 @@ def delete_regedit(sub_path) :
 
 #다량의 레지스트리키 변경
 def update_regedit_multi(Key_kb, Field, Sub_Key, value) :  
-
     parmLen = len(Sub_Key)
     z = 0  # Loop Counter for list iteration
     try:
-        #if not os.path.exists(Key):
-        #    Key = CreateKey(HKEY_CURRENT_USER, r'{}'.format(Key_kb))
-
         Registrykey = OpenKey(HKEY_CURRENT_USER, r'{}'.format(Key_kb), 0, KEY_SET_VALUE)
     except FileNotFoundError as e:
         log.logger.error("[" + Key_kb + "] " + str(e))
-        #print(f"Error: {e}")
         pass
     except OSError as e:
-        err = e
         log.logger.error("[" + Key_kb + "] " + str(e))
-        #print(f"Error: {e}")
-    else:     
+        pass
+    except Exception as e:
+        log.logger.error("[" + Key_kb + "] " + str(e))
+        pass
+    else:            
         while z < parmLen:
 
             value_data = value[z] 
@@ -233,13 +245,12 @@ def update_regedit_multi(Key_kb, Field, Sub_Key, value) :
             if Field[z] == REG_DWORD :
                 value_data = int(value[z], 16)
             elif Field[z] == REG_BINARY :
-                 value_data = bytes.fromhex(value[z])
-            
+                 value_data = bytes.fromhex(value[z])            
+          
             SetValueEx(Registrykey, Sub_Key[z], 0, Field[z], value_data)
-            log.logger.info("Setting <" + Sub_Key[z] + "> with value: " + value[z] + "update successful")
             z += 1
-        CloseKey(Registrykey)
-        log.logger.info("Setting <" + Sub_Key[z] + "> with value: " + value[z] + "update successful")
+        log.logger.info("Setting <" + Key_kb + "> update Successed")    
+        CloseKey(Registrykey)        
 
 #시스템 사양 정보       
 def office_version_check():

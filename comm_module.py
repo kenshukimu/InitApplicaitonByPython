@@ -60,6 +60,7 @@ def enum_keys_recursive(key, path):
             break
 
 def update_regedit() :
+
     key_param = "SOFTWARE\\Microsoft\\Office\\16.0\\Excel"
     field_param = [REG_SZ]
     subkey_param = ["ExcelName"]
@@ -69,7 +70,7 @@ def update_regedit() :
     key_param = "Software\\Microsoft\\Office\\16.0\\Excel\\File MRU\\Change"
     field_param = [REG_DWORD]
     subkey_param = ["ChangeId"]
-    value_param = ["785c1ee7"];
+    value_param = ["785c1ee7"]
     def_module.update_regedit_multi(key_param, field_param, subkey_param, value_param)
 
     key_param = "SOFTWARE\\Microsoft\\Office\\16.0\\Excel\\Options"
@@ -112,7 +113,7 @@ def update_regedit() :
 #Windows_info()
 #import platform
 #print(platform.architecture())
-
+"""
 try:
     key = OpenKey(HKEY_CURRENT_USER, r"SOFTWARE\\Microsoft\\Office\\16.0\\Excel")
     enum_keys_recursive(key, r"SOFTWARE\Microsoft\Office\16.0\Excel")
@@ -136,4 +137,4 @@ try:
     def_module.delete_regedit('Software\\Microsoft\\VBA\\7.1\\Common')
 except FileNotFoundError as e:
     pass
-
+"""

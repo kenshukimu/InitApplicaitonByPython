@@ -1,6 +1,8 @@
 import time
 from progressbar import ProgressBar, widgets
 import pyautogui as gui
+import def_module
+import constants
 """
 # Create a progress bar object with custom settings
 pbar = ProgressBar(
@@ -51,15 +53,38 @@ def do_work():
     for i in pbar(range(100)):
         time.sleep(0.01)
 
+def return_test(itemList) :
+    rtn = False
+    for item in itemList :
+        if item == 1 :
+            return True
+        else:
+            print(item)
+            #return False
+    return rtn
+            
+
+#itemlist = [0,2,3]
+#print(return_test(itemlist))
+
+rtn = def_module.click_after_move3(constants.list01)
+print(rtn)
+
 # Call the function
-do_work()
+#do_work()
 #print(pbar.widgets[0])
 #print(pbar.widgets[1])
 #print(pbar.widgets[2])
 #print(pbar.widgets[3])
-print(pbar.widgets[4])
+#print(pbar.widgets[4])
 #print(pbar.widgets[5])
 
 #fwAll = gui.getAllWindows()
 #for w in fwAll :
 #    print(w)
+
+
+#import psutil
+
+#for process in psutil.process_iter():
+#    print(process.name() + "\t"+str(process.pid))
