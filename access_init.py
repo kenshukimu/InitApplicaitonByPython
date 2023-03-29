@@ -28,8 +28,19 @@ constants.pbar.update(0)
 program_path_access = constants.program_path + "\\MSACCESS.exe"
 file_path    = "%s\\files\\test.accdb" % (constants.BASE_DIR)
 
-app = Application().start(r'{} "{}"'.format(program_path_access, file_path))
-time.sleep(3)
+Application().start(r'{} "{}"'.format(program_path_access, file_path))
+
+time.sleep(2)
+
+start_time = time.time() 
+access = ''
+while not len(access) > 0:
+    print("Not Loading!!")
+    access = gui.getWindowsWithTitle("Access");
+    time.sleep(2)
+
+elapsed_time = time.time() - start_time  # Calculate the elapsed time
+log.logger.info(f"엑세스 파일 로딩에 걸린 시간 Elapsed time: {elapsed_time:.2f} seconds")
 
 #w = gui.getWindowsWithTitle('Access')[0]  
 #time.sleep(1)
@@ -87,6 +98,18 @@ image_location = None
 gui.hotkey("altleft","m")
 gui.hotkey("altleft","m")
 
+
+#연결되지 않은 새 레이블 검사
+#def_module.click_after_move3(constants.list20)
+rtn = def_module.click_after_move3(constants.list20)
+
+if not rtn :
+    rtn = def_module.image_find(constants.list28)
+    if not rtn:
+        log.logger.warning("연결되지 않은 새 레이블 검사를 체크할 수 없습니다.")
+    else :
+        log.logger.warning("연결되지 않은 새 레이블 검사를 체크했습니다.")
+
 #def_module.click_after_move2(constants.path_access_file_option05_1, constants.path_access_file_option05)
 #def_module.click_after_move2(constants.path_access_file_option06_1, constants.path_access_file_option06)
 #연결되지 않은 레이블 및 컨트롤 검사
@@ -100,17 +123,6 @@ if not rtn :
     else :
         log.logger.warning("연결되지 않은 레이블 및 컨트롤 검사를 체크했습니다.")
 
-
-#연결되지 않은 새 레이블 검사
-#def_module.click_after_move3(constants.list20)
-rtn = def_module.click_after_move3(constants.list20)
-
-if not rtn :
-    rtn = def_module.image_find(constants.list28)
-    if not rtn:
-        log.logger.warning("연결되지 않은 새 레이블 검사를 체크할 수 없습니다.")
-    else :
-        log.logger.warning("연결되지 않은 새 레이블 검사를 체크했습니다.")
 time.sleep(3);
 
 constants.pbar.update(30)

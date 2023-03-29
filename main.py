@@ -28,6 +28,8 @@ pyinstaller 실행방법
 
 #install pyinstaller -w --uac-admin main.py
 #pyinstaller -F --uac-admin --add-data "./files/*;./files" --add-data "./image/*;./image" -n kcciOfficeInit main.py
+ pyinstaller -F --uac-admin --add-data "./files/*;./files" --add-data "./image/*;./image" -n  KcciExcelInit --icon=./image/file_excel_icon.png mainExcel.py 
+ pyinstaller -F --uac-admin --add-data "./files/*;./files" --add-data "./image/*;./image" -n  KcciHwpInit --icon=./image/file_hwp_icon.png mainHwp.py 
 """
 from winreg import *
 import constants
@@ -35,7 +37,6 @@ import def_module
 import time
 import pyautogui as gui
 import logging_config as log
-from pathlib import Path
 
 try:   
     

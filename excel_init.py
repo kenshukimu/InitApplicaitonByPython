@@ -26,11 +26,22 @@ constants.pbar.update(0)
 #program_path = r"C:\Program Files (x86)\Microsoft Office\Office16\excel.exe"
 program_path_excel = constants.program_path + "\\excel.exe"
 file_path    = "%s\\files\\test.xlsx" % (constants.BASE_DIR)
+Application().start(r'{} "{}"'.format(program_path_excel, file_path))
 
-app = Application().start(r'{} "{}"'.format(program_path_excel, file_path))
+start_time = time.time() 
+excel = ''
+
+while not len(excel) > 0:
+    print("Not Loading!!")
+    excel = gui.getWindowsWithTitle("Excel");
+    time.sleep(2)
+
+elapsed_time = time.time() - start_time  # Calculate the elapsed time
+log.logger.info(f"엑셀 파일 로딩에 걸린 시간 Elapsed time: {elapsed_time:.2f} seconds")
+
 constants.pbar.update(5)
 # 엑셀/파일
-time.sleep(3)
+time.sleep(2)
 #rtn = def_module.click_after_move2(constants.path_new_file01, constants.path_new_file02)
 #w = gui.getWindowsWithTitle('Excel')[0]  
 #time.sleep(2)
@@ -84,7 +95,7 @@ constants.pbar.update(20)
 #저장
 #imglist.append(constants.path_menu_file_option08)
 #def_module.click_after_move(constants.path_save_option01)
-gui.write("1");
+#gui.write("1");
 def_module.click_after_move_stop(constants.list03)
 #자동복구간격 1분
 def_module.tapkeyPress(3);
