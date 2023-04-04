@@ -2,6 +2,9 @@ import time
 from progressbar import ProgressBar, widgets
 import pyautogui as gui
 
+from win32 import win32api, win32gui
+from operator import itemgetter
+
 """
 # Create a progress bar object with custom settings
 pbar = ProgressBar(
@@ -61,8 +64,78 @@ def return_test(itemList) :
             print(item)
             #return False
     return rtn
-            
+class MoveMonitor():
+    def __init__(self, parent = None):
+        monitor = win32api.EnumDisplayMonitors()
+        #self.monitorMap = list()
+        self.monitorMap = []
 
+        #if(len(monitor) == 1) :
+        #    raise Exception("모니터가 한대만 존재합니다.")  
+
+        for info in monitor:
+            # 주 모니터와 서브 모니터 구분
+            if info[2][0] == 0 and info[2][1] == 0:
+                monitorType = "P"
+            else :
+                monitorType = "S"
+            
+            self.monitorMap.append({'type': monitorType, 'handle' : info[0], 'left' : info[2][0], 'top' : info[2][1]})        
+
+    def getActiveWindowHandle(self, titleName):
+        def callback(hwnd, hwnd_list: list):
+            #activeTitle = win32gui.GetWindowText(win32gui.GetForegroundWindow())
+           
+            title = win32gui.GetWindowText(hwnd)
+            if win32gui.IsWindowEnabled(hwnd) and win32gui.IsWindowVisible(hwnd) and title:
+                print(title)
+                #hwnd_list.append((title, hwnd))
+                if titleName in title:
+                    rect = win32gui.GetWindowRect(hwnd)
+                    hwnd_list.append((title, hwnd, rect[0], rect[1], rect[2] - rect[0], rect[3] - rect[1]))
+            return True
+        output = []
+        win32gui.EnumWindows(callback, output)
+        return output
+
+    def moveWindow(self, titleName, selMonitor):
+        # 선택된 프로그램의 핸들값
+        hwnd = self.getActiveWindowHandle(titleName)
+
+        #if(len(hwnd) == 0) :
+        #    raise Exception("지정한 Application이 실행되어 있지 않습니다.")  
+
+        # 선택된 프로그램의 현재 모니터 위치
+        thisMonitorHandle = win32api.MonitorFromWindow(hwnd[0][1])
+
+        monitor_info = win32api.GetMonitorInfo(thisMonitorHandle)
+        print(str(monitor_info))
+        print(str(self.monitorMap))
+        print(str(self.monitorMap[0]['left']))
+
+        # 창 이동
+        if(selMonitor == 0) :
+            win32gui.MoveWindow(hwnd[0][1], self.monitorMap[1]['left'], self.monitorMap[1]['top'], hwnd[0][4], hwnd[0][5], True)
+        elif (selMonitor == 1) :
+            win32gui.MoveWindow(hwnd[0][1], self.monitorMap[0]['left'], self.monitorMap[0]['top'], hwnd[0][4], hwnd[0][5], True)
+
+class MoveMonitor1() :
+    def getWindowList(self):
+        def callback(hwnd, hwnd_list: list):
+            title = win32gui.GetWindowText(hwnd)
+            if win32gui.IsWindowEnabled(hwnd) and win32gui.IsWindowVisible(hwnd) and title:
+                hwnd_list.append((title, hwnd))
+            return True
+        output = []
+        win32gui.EnumWindows(callback, output)
+        return output
+
+"""
+if __name__ == "__main__":
+    monitor = MoveMonitor1()
+    print("\n".join("{: 9d} {}".format(h, t) for t, h in monitor.getWindowList()))
+"""
+    
 #itemlist = [0,2,3]
 #print(return_test(itemlist))
 
@@ -88,8 +161,8 @@ def return_test(itemList) :
 #for process in psutil.process_iter():
 #    print(process.name() + "\t"+str(process.pid))
 
-for hwp in gui.getAllWindows() :
-    print(hwp)
+#for hwp in gui.getAllWindows() :
+#    print(hwp)
 """
 hwp = ''
 
@@ -102,3 +175,10 @@ while not len(hwp) == 1:
 
 #print(hwp[0])
 """
+try :
+    test = MoveMonitor()
+    #test.moveWindow("test.xlsx - Excel", 0)
+    test.moveWindow("마우스 속성", 0)
+except Exception as e:
+        print(str(e))
+    

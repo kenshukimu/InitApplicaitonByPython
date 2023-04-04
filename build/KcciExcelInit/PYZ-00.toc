@@ -1689,6 +1689,7 @@
   ('webbrowser',
    'c:\\users\\kimhyunsoo\\appdata\\local\\programs\\python\\python38\\lib\\webbrowser.py',
    'PYMODULE'),
+  ('win32', '-', 'PYMODULE'),
   ('win32com',
    'c:\\users\\kimhyunsoo\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\win32com\\__init__.py',
    'PYMODULE'),

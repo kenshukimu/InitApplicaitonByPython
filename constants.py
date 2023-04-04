@@ -55,6 +55,7 @@ path_menu_file_option05_5_Not = path_root + 'menu_file_option05_5_Not.PNG'
 path_hv_option01 = path_root + 'hv_option01.png'
 path_hv_option01_1 = path_root + 'hv_option01_1.png'
 path_hv_option01_2 = path_root + 'hv_option01_2.png'
+path_hv_option01_3 = path_root + 'hv_option01_3.png'
 
 path_hv_option02 = path_root + 'hv_option02.png'
 path_hv_option02_1 = path_root + 'hv_option02_1.png'
@@ -83,18 +84,22 @@ path_hv_option03_3_Not = path_root + 'hv_option03_3_Not.png'
 path_save_option01 = path_root + 'save_option01.png'
 path_save_option01_1 = path_root + 'save_option01_1.png'
 path_save_option01_2 = path_root + 'save_option01_2.png'
+path_save_option01_3 = path_root + 'save_option01_3.png'
 
 path_ribon_option01 = path_root + 'ribon_option01.png'
 path_ribon_option01_1 = path_root + 'ribon_option01_1.png'
 path_ribon_option01_2 = path_root + 'ribon_option01_2.png'
+path_ribon_option01_3 = path_root + 'ribon_option01_3.png'
 
 path_fast_option01 = path_root + 'fast_option01.png'
 path_fast_option01_1 = path_root + 'fast_option01_1.png'
 path_fast_option01_2 = path_root + 'fast_option01_2.png'
+path_fast_option01_3 = path_root + 'fast_option01_3.png'
 
 path_secu_option01 = path_root + 'secu_option01.png'
 path_secu_option01_1 = path_root + 'secu_option01_1.png'
 path_secu_option01_2 = path_root + 'secu_option01_2.png'
+path_secu_option01_3 = path_root + 'secu_option01_3.png'
 
 path_hwp_file_option01 = path_root + 'hwp_option01.PNG'
 path_hwp_file_option01_1 = path_root + 'hwp_option01_1.PNG'
@@ -157,19 +162,19 @@ else :
 list01 = [path_menu_file_option05_5, path_menu_file_option05_4, path_menu_file_option05_3, path_menu_file_option05_2, path_menu_file_option05_1, path_menu_file_option05]
 #확인버튼
 #저장
-list03 = [path_save_option01, path_save_option01_1, path_save_option01_2]
+list03 = [path_save_option01, path_save_option01_1, path_save_option01_2, path_save_option01_3]
 #고급
-list04 = [path_hv_option01, path_hv_option01_1, path_hv_option01_2]
+list04 = [path_hv_option01, path_hv_option01_1, path_hv_option01_2, path_hv_option01_3]
 #표시 - 하드웨어 그래픽 사용안함
 list06 = [path_hv_option02_5, path_hv_option02_4, path_hv_option02_3, path_hv_option02_2, path_hv_option02_1, path_hv_option02]
 #이 워크시트 표시옵션 - 계산 결과 대신 수식줄 셀에 표시
 list08 = [path_hv_option03_3, path_hv_option03_2, path_hv_option03_1, path_hv_option03]
 #리본 사용자 지정
-list09 = [path_ribon_option01, path_ribon_option01_1, path_ribon_option01_2]
+list09 = [path_ribon_option01, path_ribon_option01_1, path_ribon_option01_2, path_ribon_option01_3]
 #빠른 실행 도구 모임
-list10 = [path_fast_option01, path_fast_option01_1, path_fast_option01_2]
+list10 = [path_fast_option01, path_fast_option01_1, path_fast_option01_2, path_fast_option01_3]
 #보안센터
-list11 = [path_secu_option01, path_secu_option01_1, path_secu_option01_2]
+list11 = [path_secu_option01, path_secu_option01_1, path_secu_option01_2, path_secu_option01_3]
 #보안센터 설정
 #메크로설정
 #모든 메크로 포함

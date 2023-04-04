@@ -45,7 +45,7 @@ try:
     print("#################################################")
     print("###########대한상공회의소 자격평가사업단###########")
     print("########  엑셀/엑세스/한글 프로그램 초기화  #######")
-    print("################################# Ver. 1.0 ######")
+    print("################################# Ver. 1.1 ######")
 
     log.logger.info("프로세스 Kill 처리 START")
     def_module.kill_process("Hwp.exe");
@@ -64,6 +64,12 @@ try:
 
     constants.pbar.update(40)
     time.sleep(2);
+    
+    #화면이동
+    moveClass = def_module.MoveMonitor()
+    moveClass.moveWindow("마우스 속성", 0)
+    time.sleep(2)
+
     def_module.tapkeyPress(5);
     constants.pbar.update(50)
     gui.press("right");
