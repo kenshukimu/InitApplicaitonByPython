@@ -48,8 +48,9 @@ try :
     moveClass = def_module.MoveMonitor()
     moveClass.moveWindow("Access", 0)
 
-    time.sleep(2)
-    #w = gui.getWindowsWithTitle('Access')[0]  
+    time.sleep(3)
+    w = gui.getWindowsWithTitle('Access')[0]  
+    w.activate()
     #time.sleep(1)
     #활성화 되지 않았다면
     #while w.isActive == False: 
@@ -80,7 +81,7 @@ try :
 
     #객체디자이너
     #def_module.click_after_move(constants.path_access_file_option04)
-    def_module.click_after_move_stop(constants.list17)
+    def_module.click_after_move_stop(constants.list17, 1)
     gui.press("tab");
     constants.pbar.update(20)
 
@@ -130,12 +131,12 @@ try :
         else :
             log.logger.warning("연결되지 않은 레이블 및 컨트롤 검사를 체크했습니다.")
 
-    time.sleep(3);
+    time.sleep(1);
 
     constants.pbar.update(30)
     #리본사용자지정
     #def_module.click_after_move(constants.path_ribbon_option01)
-    def_module.click_after_move3(constants.list09)
+    def_module.click_after_move_stop(constants.list09, 1)
     def_module.tapkeyPress(9)
 
     gui.press("down");
@@ -147,7 +148,7 @@ try :
     time.sleep(1);
     constants.pbar.update(50)
     #빠른 실행 도구모음
-    def_module.click_after_move3(constants.list10)
+    def_module.click_after_move_stop(constants.list10, 1)
     def_module.tapkeyPress(7)
 
     gui.press("down");
@@ -160,7 +161,7 @@ try :
     constants.pbar.update(70)
     #보안센터
     #def_module.click_after_move(constants.path_secu_option01)
-    def_module.click_after_move3(constants.list11)
+    def_module.click_after_move_stop(constants.list11, 1)
     #보안센터 설정
     #def_module.click_after_move2(constants.path_secu_option02_1, constants.path_secu_option02)
     #def_module.click_after_move3(constants.list12)
@@ -183,6 +184,11 @@ try :
     #def_module.click_after_move3(constants.list15)
 
     #def_module.kill_process("MSACCESS.EXE");
+    moveClass = def_module.MoveMonitor()
+    moveClass.moveWindow("Access", 1)
+
+    time.sleep(1)
+    
     gui.hotkey('altleft','f4');
     constants.pbar.finish()
 except Exception as e:

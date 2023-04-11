@@ -12,20 +12,30 @@ import logging_config as log
 import numpy as np
 import cv2
 from win32 import win32api, win32gui
+import screeninfo
 
 #이미지 경로 배열로 받아 처리
-def click_after_move3(image_path_list):
+def click_after_move3(image_path_list, per=None):
     rtn = False
+
     for logImgpath in image_path_list: 
         n = np.fromfile(logImgpath, np.uint8)
         image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
-        ins = gui.locateCenterOnScreen(image_path1)  
+        
+        if per is None:
+            ins = gui.locateCenterOnScreen(image_path1)
+        else :
+            ins = gui.locateCenterOnScreen(image_path1)
     
         if ins is None:
             #print(image_path2 + " : 이미지를 찾을 수 없습니다.")
             log.logger.warning(logImgpath + " : 이미지를 찾을 수 없습니다.")
         else:            
-            gui.moveTo(ins);
+            if(monitor_x >= 0) :
+                 gui.moveTo(ins.x, ins.y);
+            else:
+                gui.moveTo(monitor_x + ins.x, ins.y);
+            
             gui.click();
             time.sleep(1); 
             rtn = True      
@@ -33,17 +43,31 @@ def click_after_move3(image_path_list):
     return rtn
 
 #이미지에 맞는 좌표값 찾아서 클릭 (없으면 정지)
-def click_after_move_stop(image_path_list):
+def click_after_move_stop(image_path_list, per=None):
     rtn = False
+
     for logImgpath in image_path_list: 
+
         n = np.fromfile(logImgpath, np.uint8)
         image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
-        ins = gui.locateCenterOnScreen(image_path1)  
+        
+        if per is None:
+            ins = gui.locateCenterOnScreen(image_path1)
+        else :
+            ins = gui.locateCenterOnScreen(image_path1)    
     
         if ins is None:
             log.logger.warning(logImgpath + " : 이미지를 찾을 수 없습니다.")
-        else:            
-            gui.moveTo(ins);
+        else:   
+            #print(monitor_x)
+            #print("click_after_move_stop : " + str(monitor_x))
+            #print("click_after_move_stop : " + str(ins.x))
+
+            if(monitor_x >= 0) :
+                 gui.moveTo(ins.x, monitor_y + ins.y);
+            else:
+                gui.moveTo(monitor_x + ins.x, monitor_y + ins.y);
+           
             gui.click();
             time.sleep(1); 
             rtn = True  
@@ -56,12 +80,17 @@ def click_after_move_stop(image_path_list):
     return rtn
 
 #이미지 확인
-def image_find(image_path_list):
+def image_find(image_path_list, per=None):
     rtn = False
+
     for logImgpath in image_path_list: 
         n = np.fromfile(logImgpath, np.uint8)
         image_path1 = cv2.imdecode(n, cv2.IMREAD_COLOR)
-        ins = gui.locateCenterOnScreen(image_path1)  
+        
+        if per is None:
+            ins = gui.locateCenterOnScreen(image_path1)           
+        else :
+            ins = gui.locateCenterOnScreen(image_path1)
     
         if ins is None:
             #print(image_path2 + " : 이미지를 찾을 수 없습니다.")
@@ -312,12 +341,36 @@ class MoveMonitor():
         thisMonitorHandle = win32api.MonitorFromWindow(hwnd[0][1])
 
         monitor_info = win32api.GetMonitorInfo(thisMonitorHandle)
-        print(str(monitor_info))
-        print(str(self.monitorMap))
-        print(str(self.monitorMap[0]['left']))
+        #print(str(monitor_info))
+        #print(str(self.monitorMap))
+        #print(str(self.monitorMap[0]['left']))
 
         # 창 이동
+        app_x, app_y = 0, 0
+        for m in screeninfo.get_monitors():
+            if m.width_mm < m.height_mm and selMonitor == 0:
+                app_x = m.x
+                app_y = m.y + m.height // 3
+
+                #이동 모니터 X좌표 가지고 처리
+                global monitor_x
+                global monitor_y
+                
+                monitor_x = m.x
+                monitor_y = m.y
+
+                break
+            elif m.width_mm > m.height_mm and selMonitor == 1:
+                app_x = m.x
+                app_y = m.y + m.height // 3   
+                break             
+
+        # 창 이동
+        win32gui.MoveWindow(hwnd[0][1], app_x, app_y, hwnd[0][4], hwnd[0][5], True)
+
+        """
         if(selMonitor == 0) :
             win32gui.MoveWindow(hwnd[0][1], self.monitorMap[1]['left'], self.monitorMap[1]['top'], hwnd[0][4], hwnd[0][5], True)
         elif (selMonitor == 1) :
             win32gui.MoveWindow(hwnd[0][1], self.monitorMap[0]['left'], self.monitorMap[0]['top'], hwnd[0][4], hwnd[0][5], True)
+        """

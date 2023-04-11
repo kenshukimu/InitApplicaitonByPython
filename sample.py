@@ -5,6 +5,13 @@ import pyautogui as gui
 from win32 import win32api, win32gui
 from operator import itemgetter
 
+import screeninfo
+
+from PIL import ImageGrab
+from functools import partial
+
+import def_module
+
 """
 # Create a progress bar object with custom settings
 pbar = ProgressBar(
@@ -12,7 +19,8 @@ pbar = ProgressBar(
     widgets=[widgets.Percentage(), ' ', widgets.Bar()]
 )
 
-# Define a function to simulate some work being done
+#a
+#  Define a function to simulate some work being done
 def do_work():
     for i in range(100):
         # Simulate some work being done
@@ -80,7 +88,9 @@ class MoveMonitor():
             else :
                 monitorType = "S"
             
-            self.monitorMap.append({'type': monitorType, 'handle' : info[0], 'left' : info[2][0], 'top' : info[2][1]})        
+            self.monitorMap.append({'type': monitorType, 'handle' : info[0], 'left' : info[2][0], 'top' : info[2][1]})    
+
+            print("INFO : "  + str(info))    
 
     def getActiveWindowHandle(self, titleName):
         def callback(hwnd, hwnd_list: list):
@@ -88,7 +98,6 @@ class MoveMonitor():
            
             title = win32gui.GetWindowText(hwnd)
             if win32gui.IsWindowEnabled(hwnd) and win32gui.IsWindowVisible(hwnd) and title:
-                print(title)
                 #hwnd_list.append((title, hwnd))
                 if titleName in title:
                     rect = win32gui.GetWindowRect(hwnd)
@@ -109,15 +118,27 @@ class MoveMonitor():
         thisMonitorHandle = win32api.MonitorFromWindow(hwnd[0][1])
 
         monitor_info = win32api.GetMonitorInfo(thisMonitorHandle)
-        print(str(monitor_info))
-        print(str(self.monitorMap))
-        print(str(self.monitorMap[0]['left']))
+        print("MONITOR_INFO : " + str(monitor_info))
+        print("MONITORMAP : " + str(self.monitorMap))
+        #print(str(self.monitorMap[0]['left']))
+        print("SCREEN_INFO : " + str(screeninfo.get_monitors()));
+
+        app_x, app_y = 0, 0
+        for m in screeninfo.get_monitors():
+            if m.width_mm < m.height_mm:
+                app_x = m.x + m.width // 2
+                app_y = m.y + m.height // 2
+
+                print(str(app_x));
+                print(str(app_y));
+                break
 
         # 창 이동
-        if(selMonitor == 0) :
-            win32gui.MoveWindow(hwnd[0][1], self.monitorMap[1]['left'], self.monitorMap[1]['top'], hwnd[0][4], hwnd[0][5], True)
-        elif (selMonitor == 1) :
-            win32gui.MoveWindow(hwnd[0][1], self.monitorMap[0]['left'], self.monitorMap[0]['top'], hwnd[0][4], hwnd[0][5], True)
+        win32gui.MoveWindow(hwnd[0][1], app_x, app_y, hwnd[0][4], hwnd[0][5], True)
+        #if(selMonitor == 0) :
+            #win32gui.MoveWindow(hwnd[0][1], self.monitorMap[1]['left'], self.monitorMap[1]['top'], hwnd[0][4], hwnd[0][5], True)
+        #elif (selMonitor == 1) :
+            #win32gui.MoveWindow(hwnd[0][1], self.monitorMap[0]['left'], self.monitorMap[0]['top'], hwnd[0][4], hwnd[0][5], True)
 
 class MoveMonitor1() :
     def getWindowList(self):
@@ -130,6 +151,16 @@ class MoveMonitor1() :
         win32gui.EnumWindows(callback, output)
         return output
 
+def ScreenInfo() :
+    app_x, app_y = 0, 0
+    for m in screeninfo.get_monitors():
+        """
+        if m.x == 0 and m.y == 0:
+            app_x = (m.width - app_width) // 2
+            app_y = (m.height -app_height) // 2
+            break
+        """
+        print(str(m))
 """
 if __name__ == "__main__":
     monitor = MoveMonitor1()
@@ -175,10 +206,16 @@ while not len(hwp) == 1:
 
 #print(hwp[0])
 """
+import constants
 try :
-    test = MoveMonitor()
+    #test = MoveMonitor()
     #test.moveWindow("test.xlsx - Excel", 0)
-    test.moveWindow("마우스 속성", 0)
+    #test.moveWindow("마우스 속성", 0)
+    #ScreenInfo()
+    ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
+    #img = ImageGrab.grab()
+    #img.save("image1.png")  # 파일로 저장 image1.png
+    def_module.click_after_move_stop(constants.list21, 1)
 except Exception as e:
         print(str(e))
     

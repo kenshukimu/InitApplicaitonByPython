@@ -37,7 +37,7 @@ import def_module
 import time
 import pyautogui as gui
 import logging_config as log
-from pathlib import Path
+#from pathlib import Path
 
 try:   
     
@@ -118,6 +118,8 @@ try:
     print("   엑셀 초기화 종료") 
     elapsed_time = time.time() - start_time  # Calculate the elapsed time
     log.logger.info(f"엑셀 처리 Elapsed time: {elapsed_time:.2f} seconds")
+
+    time.sleep(1)
 
     start_time = time.time() 
     #ACCESS 초기화 설정 

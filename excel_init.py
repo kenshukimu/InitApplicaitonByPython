@@ -53,7 +53,7 @@ try :
     moveClass = def_module.MoveMonitor()
     moveClass.moveWindow("Excel", 0)
 
-    time.sleep(2)
+    time.sleep(3)
 
     #rtn = def_module.click_after_move2(constants.path_new_file01, constants.path_new_file02)
     #w = gui.getWindowsWithTitle('Excel')[0]  
@@ -109,7 +109,7 @@ try :
     #imglist.append(constants.path_menu_file_option08)
     #def_module.click_after_move(constants.path_save_option01)
     #gui.write("1");
-    def_module.click_after_move_stop(constants.list03)
+    def_module.click_after_move_stop(constants.list03, 1)
     #자동복구간격 1분
     def_module.tapkeyPress(3);
     gui.write("1");
@@ -117,7 +117,7 @@ try :
     constants.pbar.update(30)
     #고급
     #def_module.click_after_move(constants.path_hv_option01)
-    def_module.click_after_move3(constants.list04)
+    def_module.click_after_move_stop(constants.list04)
     gui.press("tab");
     time.sleep(1);
     constants.pbar.update(40)
@@ -182,7 +182,7 @@ try :
     #리본 사용자 지정
     #def_module.click_after_move(constants.path_ribbon_option01)
     #def_module.click_after_move(constants.path_ribbon_option03)
-    def_module.click_after_move3(constants.list09)
+    def_module.click_after_move_stop(constants.list09, 1)
 
     def_module.tapkeyPress(9)
 
@@ -210,7 +210,7 @@ try :
     constants.pbar.update(70)
     #빠른 실행 도구 모임
     #def_module.click_after_move(constants.path_fast_option01)
-    def_module.click_after_move3(constants.list10)
+    def_module.click_after_move_stop(constants.list10, 1)
     def_module.tapkeyPress(7)
 
     gui.press("down");
@@ -236,7 +236,7 @@ try :
     constants.pbar.update(80)
     #보안센터
     #def_module.click_after_move(constants.path_secu_option01)
-    def_module.click_after_move3(constants.list11)
+    def_module.click_after_move_stop(constants.list11, 1)
     #보안센터 설정
     #def_module.click_after_move2(constants.path_secu_option02_1, constants.path_secu_option02)
     #def_module.click_after_move3(constants.list12)
@@ -276,6 +276,10 @@ try :
     gui.press('enter');
     gui.hotkey('altleft','f4');
     """
+    moveClass = def_module.MoveMonitor()
+    moveClass.moveWindow("Excel", 1)
+
+    time.sleep(1)
     gui.hotkey('altleft','f4');
     constants.pbar.finish()
     #def_module.kill_process("EXCEL.EXE");

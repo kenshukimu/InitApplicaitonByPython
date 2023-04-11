@@ -56,6 +56,7 @@ path_hv_option01 = path_root + 'hv_option01.png'
 path_hv_option01_1 = path_root + 'hv_option01_1.png'
 path_hv_option01_2 = path_root + 'hv_option01_2.png'
 path_hv_option01_3 = path_root + 'hv_option01_3.png'
+path_hv_option01_4 = path_root + 'hv_option01_4.png'
 
 path_hv_option02 = path_root + 'hv_option02.png'
 path_hv_option02_1 = path_root + 'hv_option02_1.png'
@@ -85,29 +86,36 @@ path_save_option01 = path_root + 'save_option01.png'
 path_save_option01_1 = path_root + 'save_option01_1.png'
 path_save_option01_2 = path_root + 'save_option01_2.png'
 path_save_option01_3 = path_root + 'save_option01_3.png'
+path_save_option01_4 = path_root + 'save_option01_4.png'
 
 path_ribon_option01 = path_root + 'ribon_option01.png'
 path_ribon_option01_1 = path_root + 'ribon_option01_1.png'
 path_ribon_option01_2 = path_root + 'ribon_option01_2.png'
 path_ribon_option01_3 = path_root + 'ribon_option01_3.png'
+path_ribon_option01_4 = path_root + 'ribon_option01_4.png'
 
 path_fast_option01 = path_root + 'fast_option01.png'
 path_fast_option01_1 = path_root + 'fast_option01_1.png'
 path_fast_option01_2 = path_root + 'fast_option01_2.png'
 path_fast_option01_3 = path_root + 'fast_option01_3.png'
+path_fast_option01_4 = path_root + 'fast_option01_4.png'
 
 path_secu_option01 = path_root + 'secu_option01.png'
 path_secu_option01_1 = path_root + 'secu_option01_1.png'
 path_secu_option01_2 = path_root + 'secu_option01_2.png'
 path_secu_option01_3 = path_root + 'secu_option01_3.png'
+path_secu_option01_4 = path_root + 'secu_option01_4.png'
 
 path_hwp_file_option01 = path_root + 'hwp_option01.PNG'
 path_hwp_file_option01_1 = path_root + 'hwp_option01_1.PNG'
+path_hwp_file_option01_2 = path_root + 'hwp_option01_2.PNG'
 
 path_hwp_file_option02 = path_root + 'hwp_option02.PNG'
+path_hwp_file_option02_1 = path_root + 'hwp_option02_1.PNG'
 path_hwp_file_option03 = path_root + 'hwp_option03.PNG'
 path_hwp_file_option03_1 = path_root + 'hwp_option03_1.PNG'
 path_hwp_file_option03_2 = path_root + 'hwp_option03_2.PNG'
+path_hwp_file_option03_3 = path_root + 'hwp_option03_3.PNG'
 
 path_access_file_option03 = path_root + 'menu_file_access_option03.PNG'
 path_access_file_option03_1 = path_root + 'menu_file_access_option03_1.PNG'
@@ -118,6 +126,7 @@ path_access_file_option03_4 = path_root + 'menu_file_access_option03_4.PNG'
 path_access_file_option04 = path_root + 'menu_file_access_option04.PNG'
 path_access_file_option04_1 = path_root + 'menu_file_access_option04_1.PNG'
 path_access_file_option04_2 = path_root + 'menu_file_access_option04_2.PNG'
+path_access_file_option04_3 = path_root + 'menu_file_access_option04_3.PNG'
 
 path_access_file_option05 = path_root + 'menu_file_access_option05.PNG'
 path_access_file_option05_1 = path_root + 'menu_file_access_option05_1.PNG'
@@ -162,19 +171,19 @@ else :
 list01 = [path_menu_file_option05_5, path_menu_file_option05_4, path_menu_file_option05_3, path_menu_file_option05_2, path_menu_file_option05_1, path_menu_file_option05]
 #확인버튼
 #저장
-list03 = [path_save_option01, path_save_option01_1, path_save_option01_2, path_save_option01_3]
+list03 = [path_save_option01, path_save_option01_1, path_save_option01_2, path_save_option01_3, path_save_option01_4]
 #고급
-list04 = [path_hv_option01, path_hv_option01_1, path_hv_option01_2, path_hv_option01_3]
+list04 = [path_hv_option01, path_hv_option01_1, path_hv_option01_2, path_hv_option01_3, path_hv_option01_4]
 #표시 - 하드웨어 그래픽 사용안함
 list06 = [path_hv_option02_5, path_hv_option02_4, path_hv_option02_3, path_hv_option02_2, path_hv_option02_1, path_hv_option02]
 #이 워크시트 표시옵션 - 계산 결과 대신 수식줄 셀에 표시
 list08 = [path_hv_option03_3, path_hv_option03_2, path_hv_option03_1, path_hv_option03]
 #리본 사용자 지정
-list09 = [path_ribon_option01, path_ribon_option01_1, path_ribon_option01_2, path_ribon_option01_3]
+list09 = [path_ribon_option01, path_ribon_option01_1, path_ribon_option01_2, path_ribon_option01_3, path_ribon_option01_4]
 #빠른 실행 도구 모임
-list10 = [path_fast_option01, path_fast_option01_1, path_fast_option01_2, path_fast_option01_3]
+list10 = [path_fast_option01, path_fast_option01_1, path_fast_option01_2, path_fast_option01_3, path_fast_option01_4]
 #보안센터
-list11 = [path_secu_option01, path_secu_option01_1, path_secu_option01_2, path_secu_option01_3]
+list11 = [path_secu_option01, path_secu_option01_1, path_secu_option01_2, path_secu_option01_3, path_secu_option01_4]
 #보안센터 설정
 #메크로설정
 #모든 메크로 포함
@@ -184,16 +193,16 @@ list11 = [path_secu_option01, path_secu_option01_1, path_secu_option01_2, path_s
 #하드웨어 그래픽 사용안함
 list16 = [path_access_file_option03_4, path_access_file_option03_3, path_access_file_option03_2, path_access_file_option03_1, path_access_file_option03]
 #객체디자이너 - 폼 및 보고서 디자인 보기에서 오류검사
-list17 = [path_access_file_option04_2, path_access_file_option04_1, path_access_file_option04]
+list17 = [path_access_file_option04_2, path_access_file_option04_1, path_access_file_option04, path_access_file_option04_3]
 #연결되지 않은 레이블 및 컨트롤 검사
 list19 = [path_access_file_option05_5, path_access_file_option05_4, path_access_file_option05_3, path_access_file_option05_2, path_access_file_option05_1, path_access_file_option05]
 #연결되지 않은 새 레이블 검사
 list20 = [path_access_file_option06_5, path_access_file_option06_4, path_access_file_option06_3, path_access_file_option06_2, path_access_file_option06_1, path_access_file_option06]
 
 #한글
-list21 = [path_hwp_file_option01, path_hwp_file_option01_1]
-list22 = [path_hwp_file_option02]
-list23 = [path_hwp_file_option03_2, path_hwp_file_option03_1, path_hwp_file_option03]
+list21 = [path_hwp_file_option01, path_hwp_file_option01_1, path_hwp_file_option01_2]
+list22 = [path_hwp_file_option02, path_hwp_file_option02_1]
+list23 = [path_hwp_file_option03_2, path_hwp_file_option03_1, path_hwp_file_option03_3, path_hwp_file_option03]
 
 #이미지 체크
 #한영자동고침

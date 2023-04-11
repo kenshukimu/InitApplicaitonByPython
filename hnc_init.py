@@ -37,16 +37,16 @@ try :
     moveClass = def_module.MoveMonitor()
     moveClass.moveWindow("한컴오피스", 0)
 
-    time.sleep(2)
+    time.sleep(3)
 
-    def_module.click_after_move3(constants.list21)
+    def_module.click_after_move_stop(constants.list21, 1)
     #def_module.click_after_move(constants.path_hwp_file_option01);
     time.sleep(3)
-    def_module.click_after_move3(constants.list22)
+    def_module.click_after_move_stop(constants.list22, 1)
     #def_module.click_after_move(constants.path_hwp_file_option02);
     constants.pbar.update(50)
     time.sleep(3)
-    def_module.click_after_move3(constants.list23)
+    def_module.click_after_move_stop(constants.list23, 1)
     #def_module.click_after_move(constants.path_hwp_file_option03);
     constants.pbar.update(60)
     time.sleep(3)
@@ -73,7 +73,6 @@ try :
     constants.pbar.update(70)
 
     #화면이동
-    moveClass = def_module.MoveMonitor()
     moveClass.moveWindow("test.hwp", 0)
     time.sleep(2)
 
@@ -97,6 +96,8 @@ try :
 
     constants.pbar.update(90)
     time.sleep(2)
+    moveClass.moveWindow("test.hwp", 1)
+
     gui.press("f")
     gui.press("x")
     constants.pbar.finish()
