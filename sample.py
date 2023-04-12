@@ -187,10 +187,10 @@ if __name__ == "__main__":
 #    print(w)
 
 
-#import psutil
+import psutil
 
-#for process in psutil.process_iter():
-#    print(process.name() + "\t"+str(process.pid))
+for process in psutil.process_iter():
+    print(process.name() + "\t"+str(process.pid))
 
 #for hwp in gui.getAllWindows() :
 #    print(hwp)
@@ -205,17 +205,19 @@ while not len(hwp) == 1:
     time.sleep(1)
 
 #print(hwp[0])
-"""
+
 import constants
 try :
     #test = MoveMonitor()
     #test.moveWindow("test.xlsx - Excel", 0)
     #test.moveWindow("마우스 속성", 0)
     #ScreenInfo()
-    ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
+    #ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
     #img = ImageGrab.grab()
     #img.save("image1.png")  # 파일로 저장 image1.png
-    def_module.click_after_move_stop(constants.list21, 1)
+    #def_module.click_after_move_stop(constants.list21, 1)
+
+
 except Exception as e:
         print(str(e))
-    
+"""

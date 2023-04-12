@@ -105,9 +105,9 @@ try:
     constants.pbar.update(90)
     gui.press("a");
     gui.press("enter");
-
     time.sleep(1);
     constants.pbar.finish()
+    def_module.kill_process("rundll32.exe");
     print("   마우스 컨트롤 제어 초기화 종료")
     #MOUSE 컨트롤 설정 END
 

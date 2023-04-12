@@ -104,7 +104,6 @@ def image_find(image_path_list, per=None):
 #프로세스 제거
 def kill_process(process_name):
     for proc in psutil.process_iter():
-        #if proc.name() == "EXCEL.EXE":
         if proc.name() == process_name:
             proc.kill()
 

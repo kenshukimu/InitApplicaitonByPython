@@ -91,6 +91,7 @@ try:
     time.sleep(1);
     constants.pbar.finish()
     print("   마우스 컨트롤 제어 초기화 종료")
+    def_module.kill_process("rundll32.exe");
     #MOUSE 컨트롤 설정 END
 
     start_time = time.time() 
